@@ -6,6 +6,10 @@ import psycopg2 as psycopg2
 from requests import Session
 from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
 
+# ----------    BOT OBJECTS    ---------- #
+plugin = lightbulb.Plugin("market")  # Create plugin
+embed = hikari.Embed()  # Create embed
+
 # ----------    ENV VARS  ---------- #
 CMC_API_KEY = os.environ.get("CMC_API_KEY")
 DATABASE_PW = os.environ.get("DATABASE_PW")
@@ -108,38 +112,36 @@ def update_coins():
         print(e)
 
 
-# ----------    BOT OBJECTS    ---------- #
-plugin = lightbulb.Plugin("market")  # Create plugin
-embed = hikari.Embed()  # Create embed
-
-
 # ----------    BOT COMMANDS    ---------- #
 @plugin.command
-@lightbulb.command("market", "")
+@lightbulb.command("market", "Display coin info")
 @lightbulb.implements(lightbulb.SlashCommandGroup)
 async def top_coins(ctx):
     pass
 
 
 @top_coins.child
+@lightbulb.option("number", "Displays current coin info for the ranked coin", type=str)
 @lightbulb.command("rank", "Enter a coin rank")
 @lightbulb.implements(lightbulb.SlashSubCommand)
 async def top_coins_rank(ctx):
-    await ctx.respond("i am an sc")
+    await ctx.respond(ctx.options.rank)
 
 
 @top_coins.child
+@lightbulb.option("name", "Displays current coin info for the coin name", type=str)
 @lightbulb.command("name", "Enter a coin name")
 @lightbulb.implements(lightbulb.SlashSubCommand)
 async def top_coins_list(ctx):
-    await ctx.respond("i am an sc")
+    await ctx.respond(ctx.options.rank)
 
 
 @top_coins.child
-@lightbulb.command("list top", "Enter a coin rank")
+@lightbulb.option("rank", "Displays the top 10 coins of the respective rank", type=int)
+@lightbulb.command("list", "Enter a coin rank")
 @lightbulb.implements(lightbulb.SlashSubCommand)
 async def top_coins_list(ctx):
-    await ctx.respond("i am an sc")
+    await ctx.respond(ctx.options.rank)
 
 
 # ----------    LOAD PLUG-IN   ---------- #

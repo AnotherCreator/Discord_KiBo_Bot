@@ -36,7 +36,8 @@ async def ping(ctx):
 # ----------     MAIN LINE      ---------- #
 if __name__ == '__main__':
 
-    @tasks.task(s=60, auto_start=True)
+    # ----------    BACKGROUND TASKS    ---------- #
+    @tasks.task(s=300, auto_start=True)  # Run every 5 min
     async def refresh_coins():
         update_coins()
         print("Coins successfully updated")

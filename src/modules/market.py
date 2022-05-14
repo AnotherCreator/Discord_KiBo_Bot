@@ -143,7 +143,7 @@ async def top_coins_rank(ctx):
                     icon=x[6]
                 )
                 .add_field(
-                    "24h %",
+                    "5min % Change",
                     f"{x[5]:.2f}%",
                     inline=False
                 )

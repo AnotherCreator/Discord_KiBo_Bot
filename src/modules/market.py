@@ -1,11 +1,10 @@
+import hikari
 import json
 import lightbulb
 import os
 import psycopg2 as psycopg2
 from requests import Session
 from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
-
-plugin = lightbulb.Plugin("market")  # Create plugin
 
 # ----------    ENV VARS  ---------- #
 CMC_API_KEY = os.environ.get("CMC_API_KEY")
@@ -109,9 +108,14 @@ def update_coins():
         print(e)
 
 
+# ----------    BOT OBJECTS    ---------- #
+plugin = lightbulb.Plugin("market")  # Create plugin
+embed = hikari.Embed()  # Create embed
+
+
 # ----------    BOT COMMANDS    ---------- #
 @plugin.command
-@lightbulb.command("top", "Display cryptocurrency info")
+@lightbulb.command("market", "")
 @lightbulb.implements(lightbulb.SlashCommandGroup)
 async def top_coins(ctx):
     pass
@@ -132,7 +136,7 @@ async def top_coins_list(ctx):
 
 
 @top_coins.child
-@lightbulb.command("list", "Enter a coin rank")
+@lightbulb.command("list top", "Enter a coin rank")
 @lightbulb.implements(lightbulb.SlashSubCommand)
 async def top_coins_list(ctx):
     await ctx.respond("i am an sc")

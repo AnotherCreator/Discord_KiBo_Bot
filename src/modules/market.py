@@ -135,8 +135,7 @@ async def top_coins_rank(ctx):
         if x[4] == coin_number:
             embed = (
                 hikari.Embed(
-                    title=f"${str(x[3])}",
-                    description=" "
+                    title=f"${str(x[3])}"
                 )
                 .set_author(
                     name=f"{x[4]}. {x[1]} / {x[2]}",
